@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" th:href="@{/css/Signup.css}" />
+    <link rel="stylesheet" href="../../static/css/Signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<header>
+    <th:block th:insert="~{/header_on}" th:if="${user.username}"></th:block>
+    <th:block th:insert="~{/header_off}" th:unless="${user.username}"></th:block>
+</header>
+<div class="signup">
+    <div clas="main-container">
+    <div class="wrapper">
+        <div th:if="${param.success}" >
+            <div class="alert alert-info">You've successfully registered</div>
+        </div>
+        <form th:action="@{/signup}" method="post" th:object="${user}">
+            <h1>Sign up</h1>
+            <div class="inputbox">
+                <input type="text" th:field="*{username}" placeholder="Username" required autofucus="autofocus">
+                <i class="fas fa-user icon"></i>
+            </div>
+            <div th:if="${param.username_exist}">
+                <div class="alert alert-info">Your Username have existed please register other Username</div>
+            </div>
+            <div class="inputbox">
+                <input type="password" th:field="*{password}" placeholder="Password" required>
+                <i class="fas fa-lock icon"></i>
+            </div>
+            <div class="inputbox">
+                <input type="email" th:field="*{email}" placeholder="Email" required>
+                <i class="fa-solid fa-envelope icon"></i>
+            </div>
+            <div class="inputbox">
+                <input type="text" th:field="*{fullName}" placeholder="Full Name" required>
+                <i class="fa-solid fa-address-card icon"></i>
+            </div>
+            <div class="inputbox">
+                <input type="text" th:field="*{sdt}" placeholder="Phone Number" required>
+                <i class="fa-solid fa-phone icon"></i>
+            </div>
+            <div class="inputbox">
+                <input type="text" th:field="*{address}" placeholder="Address" required>
+                <i class="fa-solid fa-address-card icon"></i>
+            </div>
+
+            <button type="submit">Sign Up</button>
+            <div class="register">
+                <p>Have an account? <a href="/" th:href="@{/signin}">Sign In</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+</body>
+</html>
